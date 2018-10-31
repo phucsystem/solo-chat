@@ -4,11 +4,23 @@ import ChatArea from "./ChatArea";
 import "./App.css";
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { messages: [] };
+    }
+    sendMessageHandler(newMessage) {
+        this.setState({
+            messages: [
+                ...this.state.messages,
+                newMessage
+            ]
+        });
+    }
     render() {
         return (
             <div className="app">
-                <ChatArea />
-                <MessageBar />
+                <ChatArea data={this.state.messages} />
+                <MessageBar onSendMessage={this.sendMessageHandler.bind(this)} />
             </div>
         );
     }
